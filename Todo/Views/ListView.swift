@@ -8,11 +8,31 @@
 import SwiftUI
 
 struct ListView: View {
+    @EnvironmentObject var listViewModel: ListViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(listViewModel.items, id: \.id) { newitem in
+                ListRowView(item: newitem).contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation(.linear) {
+                            listViewModel.updateItemStatus(item: newitem)
+                        }
+                    }
+            }.onDelete(perform: listViewModel.DeleteItem)
+                .onMove(perform: listViewModel.MoveItem)
+        }
+        .listStyle(PlainListStyle())
+        .navigationTitle("Todo List 📝")
+        .navigationBarItems(
+            leading: EditButton(),
+            trailing: NavigationLink("Add", destination: AddView())
+        )
     }
+
 }
 
 #Preview {
-    ListView()
+    NavigationView {
+        ListView()
+    }.environmentObject(ListViewModel())
 }
