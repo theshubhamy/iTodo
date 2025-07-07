@@ -8,27 +8,31 @@
 import Foundation
 
 class ListViewModel: ObservableObject {
-    @Published var items: [ItemModel] = []
+    @Published var items: [ItemModel] = [] {
+        didSet {
+            SaveItems()
+        }
+    }
+
+    let itemKey: String = "Todo_list"
+
     init() {
         getItems()
 
     }
     func getItems() {
-        let newItem = [
-            ItemModel(
-                title: "Pending",
-                status: .pending
-            ),
-            ItemModel(
-                title: "Done",
-                status: .completed
-            ),
-            ItemModel(
-                title: "In Progress",
-                status: .inProgress
-            ),
-        ]
-        items.append(contentsOf: newItem)
+
+        guard
+            let data = UserDefaults.standard.data(forKey: itemKey),
+            let savedItem = try? JSONDecoder().decode(
+                [ItemModel].self,
+                from: data
+            )
+        else {
+            return
+        }
+        self.items = savedItem
+
     }
 
     func DeleteItem(indexSet: IndexSet) {
@@ -51,4 +55,9 @@ class ListViewModel: ObservableObject {
         }
     }
 
+    func SaveItems() {
+        if let encodedData = try? JSONEncoder().encode(items) {
+            UserDefaults.standard.set(encodedData, forKey: itemKey)
+        }
+    }
 }
