@@ -8,8 +8,19 @@ iTodo is a minimalist and elegant ToDo app built using **SwiftUI**. It helps use
 
 - 📝 Create, update, and delete tasks
 - ✅ Mark tasks as pending, in-progress, or completed
-- 💾 Data persistence using `@AppStorage` or local storage
+- 💾 Lightweight data persistence using `UserDefaults`
 - 🔁 Smooth task status transitions with animations
+- 🌓 Auto-adapts to light & dark mode
+
+---
+
+## 💾 Data Persistence
+
+iTodo uses **UserDefaults** to persist your to-do list locally.
+
+- All tasks are encoded with `Codable` and stored using `UserDefaults.standard`.
+- Fully offline — no sign-in or internet required.
+- Tasks remain saved across app launches.
 
 ---
 
