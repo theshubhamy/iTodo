@@ -36,19 +36,17 @@ iTodo/
 ├── Views/
 │ ├── ListView\.swift
 │ ├── ListRowView\.swift
+│ ├── EmptyItemsView\.swift
 │ └── AddView\.swift
+│ └── LaunchScreen\.storyboard
 ├── ViewModels/
 │ └── ListViewModel.swift
-├── Resources/
-│ └── LaunchScreen.storyboard
 ├── preview/
 │ ├── screen1.png
 │ ├── screen2.png
 │ ├── screen3.png
 │ └── screen4.png
-├── Assets/
-│ └── itodo-preview\.png
-├── iTodoApp.swift
+├── TodoApp.swift
 └── README.md
 
 ```
