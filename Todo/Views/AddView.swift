@@ -17,12 +17,14 @@ struct AddView: View {
     var body: some View {
         ScrollView {
             VStack {
-                TextField("Type here...", text: $textFieldInput)
-                    .padding(.horizontal)
-                    .frame(height: 55)
-                    .background(Color.gray)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(10)
+                TextField(
+                    "Type here...",
+                    text: $textFieldInput,
+                )
+                .padding(.horizontal)
+                .frame(height: 55)
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(10)
                 Button(
                     action: saveButtomPressed,
                     label: {
@@ -43,7 +45,7 @@ struct AddView: View {
     }
 
     func saveButtomPressed() {
-        if validateInput(){
+        if validateInput() {
             listViewModel.AddNewItem(title: textFieldInput)
             presentationMode.wrappedValue.dismiss()
         }
